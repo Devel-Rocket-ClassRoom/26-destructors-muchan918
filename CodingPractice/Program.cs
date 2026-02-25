@@ -2,11 +2,43 @@ using System;
 using System.Threading;
 
 Test1();
+GC.Collect();
+GC.WaitForPendingFinalizers();
+
+Console.WriteLine("GC 실행 후");
+
 Test2();
+Console.WriteLine("GC 실행");
+GC.Collect();
+GC.WaitForPendingFinalizers();
+
+Console.WriteLine("프로그램 종료");
 Test3();
+
+Console.WriteLine("=== GC 실행 ===");
+GC.Collect();
+GC.WaitForPendingFinalizers();
+Console.WriteLine("=== 정리 완료 ===");
+
 Test4();
+
+GC.Collect();
+GC.WaitForPendingFinalizers();
+
 Test5();
+
+GC.Collect();
+GC.WaitForPendingFinalizers();
+
+Console.WriteLine();
+Monster.ShowStats();
+
 Test6();
+
+GC.Collect();
+GC.WaitForPendingFinalizers();
+Console.WriteLine("=== 정리 완료 ===");
+
 
 void Test1()
 {
@@ -17,11 +49,6 @@ void Test1()
     obj2 = null;
 
     Console.WriteLine("GC 실행 전");
-
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
-
-    Console.WriteLine("GC 실행 후");
 }
 
 void Test2()
@@ -31,12 +58,6 @@ void Test2()
     Character hero = new Character("용사");
     hero.Attack();
     hero = null;
-
-    Console.WriteLine("GC 실행");
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
-
-    Console.WriteLine("프로그램 종료");
 }
 
 void Test3()
@@ -56,10 +77,6 @@ void Test3()
     car2 = null;
     car3 = null;
 
-    Console.WriteLine("=== GC 실행 ===");
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
-    Console.WriteLine("=== 정리 완료 ===");
 }
 
 void Test4()
@@ -68,8 +85,6 @@ void Test4()
     session.Play();
     session = null;
 
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
 }
 
 void Test5()
@@ -87,11 +102,7 @@ void Test5()
     m2 = null;
     m3 = null;
 
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
 
-    Console.WriteLine();
-    Monster.ShowStats();
 }
 
 void Test6()
@@ -112,8 +123,6 @@ void Test6()
     sword = null;
     shield = null;
 
-    GC.Collect();
-    GC.WaitForPendingFinalizers();
-    Console.WriteLine("=== 정리 완료 ===");
+
 }
 
